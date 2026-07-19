@@ -15,11 +15,12 @@
 
 body{
     background:#000;
-    color:#fff;
+    color:white;
+    overflow:hidden;
 }
 
-/* Kolme viivaa */
-.menu{
+/* Hampurilaisvalikko */
+.menu-btn{
     position:fixed;
     top:20px;
     left:20px;
@@ -30,7 +31,6 @@ body{
     z-index:1000;
 }
 
-/* Sivuvalikko */
 .sidebar{
     position:fixed;
     top:0;
@@ -38,18 +38,19 @@ body{
     width:260px;
     height:100%;
     background:#111;
-    transition:.3s;
+    transition:.35s;
     padding-top:80px;
-    box-shadow:0 0 20px red;
+    box-shadow:0 0 25px red;
     z-index:999;
 }
 
 .sidebar a{
     display:block;
-    padding:18px 25px;
-    color:#00ffff;
+    padding:18px 30px;
+    color:#00fff7;
     text-decoration:none;
     font-size:22px;
+    transition:.2s;
 }
 
 .sidebar a:hover{
@@ -58,28 +59,24 @@ body{
 }
 
 .page{
-    display:none;
-    min-height:100vh;
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
     text-align:center;
-    padding:30px;
-}
-
-#home{
-    display:flex;
 }
 
 #logo{
     font-size:90px;
     color:#ff0000;
-    cursor:pointer;
     text-shadow:
-    0 0 10px red,
-    0 0 20px red,
-    0 0 40px red,
-    0 0 80px red;
+        0 0 10px red,
+        0 0 20px red,
+        0 0 40px red,
+        0 0 80px red;
+    cursor:pointer;
 }
 
 #logo:hover{
@@ -87,57 +84,60 @@ body{
 }
 
 .info{
+    color:#00fff7;
     margin-top:20px;
-    color:#00ffff;
     font-size:22px;
     text-shadow:0 0 10px cyan;
 }
 
+#about,#social{
+    display:none;
+    padding:40px;
+}
+
 h1{
     color:#ff0000;
-    margin-bottom:25px;
+    margin-bottom:30px;
     text-shadow:0 0 15px red;
 }
 
 p{
-    max-width:900px;
     font-size:24px;
+    max-width:900px;
     line-height:1.7;
 }
 
-.social{
-    display:block;
-    width:280px;
-    margin:12px auto;
-    padding:15px;
-    border-radius:10px;
-    background:#ff0000;
+.yt{
+    display:inline-block;
+    margin-top:30px;
+    padding:18px 35px;
+    background:red;
     color:white;
     text-decoration:none;
+    border-radius:10px;
     font-size:22px;
-    box-shadow:0 0 15px red;
-    transition:.3s;
+    box-shadow:0 0 20px red;
 }
 
-.social:hover{
+.yt:hover{
     transform:scale(1.05);
-    background:#ff3333;
 }
 </style>
 </head>
-
 <body>
 
-<div class="menu" onclick="toggleMenu()">☰</div>
+<div class="menu-btn" onclick="menu()">☰</div>
 
 <div class="sidebar" id="sidebar">
-    <a href="#" onclick="showPage('home')">🏠 Etusivu</a>
-    <a href="#" onclick="showPage('about')">👤 Tietoa</a>
-    <a href="#" onclick="showPage('social')">🌐 Some</a>
+    <a href="#" onclick="etusivu()">🏠 Etusivu</a>
+    <a href="#" onclick="tietoa()">👤 Tietoa</a>
+    <a href="#" onclick="some()">📺 Some</a>
 </div>
 
 <div class="page" id="home">
-    <div id="logo" onclick="showPage('about')">VEIKKIZ</div>
+    <div id="logo" onclick="tietoa()">
+        VEIKKIZ
+    </div>
 
     <div class="info">
         Paina tekstiä niin pääset lisätietoihin
@@ -157,46 +157,19 @@ p{
 </div>
 
 <div class="page" id="social">
+    <h1>Some</h1>
 
-    <h1>Seuraa minua</h1>
-
-    <a class="social"
+    <a class="yt"
        href="https://www.youtube.com/@veikkizyt_official"
        target="_blank">
        📺 YouTube
     </a>
-
-    <a class="social"
-       href="https://www.instagram.com/official.veikkizyt"
-       target="_blank">
-       📷 Instagram
-    </a>
-
-    <a class="social"
-       href="https://www.tiktok.com/@official_veikkiz"
-       target="_blank">
-       🎵 TikTok
-    </a>
-
-    <a class="social"
-       href="https://www.twitch.tv/veikkalehtone"
-       target="_blank">
-       🎮 Twitch
-    </a>
-
-    <a class="social"
-       href="https://discord.gg/y6tcd3Nh"
-       target="_blank">
-       💬 Discord
-    </a>
-
 </div>
 
 <script>
-
 let open=false;
 
-function toggleMenu(){
+function menu(){
     if(open){
         document.getElementById("sidebar").style.left="-260px";
         open=false;
@@ -206,18 +179,28 @@ function toggleMenu(){
     }
 }
 
-function showPage(id){
-
+function hidePages(){
     document.getElementById("home").style.display="none";
     document.getElementById("about").style.display="none";
     document.getElementById("social").style.display="none";
-
-    document.getElementById(id).style.display="flex";
-
     document.getElementById("sidebar").style.left="-260px";
     open=false;
 }
 
+function etusivu(){
+    hidePages();
+    document.getElementById("home").style.display="flex";
+}
+
+function tietoa(){
+    hidePages();
+    document.getElementById("about").style.display="flex";
+}
+
+function some(){
+    hidePages();
+    document.getElementById("social").style.display="flex";
+}
 </script>
 
 </body>
