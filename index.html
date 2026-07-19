@@ -10,12 +10,52 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
     background:#000;
-    font-family:Arial, Helvetica, sans-serif;
+    color:white;
     overflow:hidden;
+}
+
+/* Hampurilaisvalikko */
+.menu-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    font-size:40px;
+    color:#ff0000;
+    cursor:pointer;
+    text-shadow:0 0 15px red;
+    z-index:1000;
+}
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-260px;
+    width:260px;
+    height:100%;
+    background:#111;
+    transition:.35s;
+    padding-top:80px;
+    box-shadow:0 0 25px red;
+    z-index:999;
+}
+
+.sidebar a{
+    display:block;
+    padding:18px 30px;
+    color:#00fff7;
+    text-decoration:none;
+    font-size:22px;
+    transition:.2s;
+}
+
+.sidebar a:hover{
+    background:#ff0000;
+    color:white;
 }
 
 .page{
@@ -25,51 +65,40 @@ body{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-}
-
-#home{
-    background:#000;
+    text-align:center;
 }
 
 #logo{
     font-size:90px;
     color:#ff0000;
     text-shadow:
-    0 0 10px #ff0000,
-    0 0 20px #ff0000,
-    0 0 40px #ff0000,
-    0 0 80px #ff0000;
+        0 0 10px red,
+        0 0 20px red,
+        0 0 40px red,
+        0 0 80px red;
     cursor:pointer;
-    transition:.3s;
 }
 
 #logo:hover{
-    transform:scale(1.08);
+    transform:scale(1.05);
 }
 
 .info{
-    margin-top:20px;
     color:#00fff7;
-    font-size:20px;
-    text-shadow:
-    0 0 10px #00fff7,
-    0 0 20px #00fff7;
+    margin-top:20px;
+    font-size:22px;
+    text-shadow:0 0 10px cyan;
 }
 
-#about{
+#about,#social{
     display:none;
-    background:#000;
-    color:white;
-    padding:30px;
-    text-align:center;
+    padding:40px;
 }
 
 h1{
     color:#ff0000;
-    text-shadow:
-    0 0 10px red,
-    0 0 25px red;
     margin-bottom:30px;
+    text-shadow:0 0 15px red;
 }
 
 p{
@@ -78,71 +107,101 @@ p{
     line-height:1.7;
 }
 
-button{
-    margin-top:40px;
-    padding:15px 35px;
-    background:#ff0000;
+.yt{
+    display:inline-block;
+    margin-top:30px;
+    padding:18px 35px;
+    background:red;
     color:white;
-    border:none;
+    text-decoration:none;
     border-radius:10px;
-    cursor:pointer;
-    font-size:18px;
-}
-
-button:hover{
+    font-size:22px;
     box-shadow:0 0 20px red;
 }
-</style>
 
+.yt:hover{
+    transform:scale(1.05);
+}
+</style>
 </head>
 <body>
 
+<div class="menu-btn" onclick="menu()">☰</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#" onclick="etusivu()">🏠 Etusivu</a>
+    <a href="#" onclick="tietoa()">👤 Tietoa</a>
+    <a href="#" onclick="some()">📺 Some</a>
+</div>
+
 <div class="page" id="home">
+    <div id="logo" onclick="tietoa()">
+        VEIKKIZ
+    </div>
 
-<div id="logo" onclick="avaa()">
-VEIKKIZ
-</div>
-
-<div class="info">
-Paina tekstiä niin pääset lisätietoihin
-</div>
-
+    <div class="info">
+        Paina tekstiä niin pääset lisätietoihin
+    </div>
 </div>
 
 <div class="page" id="about">
+    <h1>VEIKKIZ</h1>
 
-<h1>VEIKKIZ</h1>
+    <p>
+        Moi! Oon Veikka, paremmin YouTubessa nimellä <b>Veikkiz</b>.<br><br>
 
-<p>
-Moi! Oon Veikka, paremmin YouTubessa nimellä <b>Veikkiz</b>.
-Teen tänne pelivideoita, kuten Minecraftia, FS22:ta ja monia muita pelejä.
-Teen myös joskus musiikkia.
-</p>
+        Teen tänne pelivideoita mm. Minecraftia, FS22:ta ja monia muita pelejä.<br><br>
 
-<button onclick="takaisin()">
-Takaisin
-</button>
+        Teen myös joskus musiikkia.
+    </p>
+</div>
 
+<div class="page" id="social">
+    <h1>Some</h1>
+
+    <a class="yt"
+       href="https://www.youtube.com/@veikkizyt_official"
+       target="_blank">
+       📺 YouTube
+    </a>
 </div>
 
 <script>
+let open=false;
 
-function avaa(){
-document.getElementById("home").style.display="none";
-document.getElementById("about").style.display="flex";
+function menu(){
+    if(open){
+        document.getElementById("sidebar").style.left="-260px";
+        open=false;
+    }else{
+        document.getElementById("sidebar").style.left="0";
+        open=true;
+    }
 }
 
-function takaisin(){
-document.getElementById("about").style.display="none";
-document.getElementById("home").style.display="flex";
+function hidePages(){
+    document.getElementById("home").style.display="none";
+    document.getElementById("about").style.display="none";
+    document.getElementById("social").style.display="none";
+    document.getElementById("sidebar").style.left="-260px";
+    open=false;
 }
 
+function etusivu(){
+    hidePages();
+    document.getElementById("home").style.display="flex";
+}
+
+function tietoa(){
+    hidePages();
+    document.getElementById("about").style.display="flex";
+}
+
+function some(){
+    hidePages();
+    document.getElementById("social").style.display="flex";
+}
 </script>
 
 </body>
 </html>
-<h1>Some</h1>
-
-<a href="https://www.youtube.com/@veikkizyt_official" target="_blank">
-📺 YouTube
-</a>
