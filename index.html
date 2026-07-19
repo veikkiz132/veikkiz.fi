@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veikkiz</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow:hidden;
+}
+
+.page{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#home{
+    background:#000;
+}
+
+#logo{
+    font-size:90px;
+    color:#ff0000;
+    text-shadow:
+    0 0 10px #ff0000,
+    0 0 20px #ff0000,
+    0 0 40px #ff0000,
+    0 0 80px #ff0000;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#logo:hover{
+    transform:scale(1.08);
+}
+
+.info{
+    margin-top:20px;
+    color:#00fff7;
+    font-size:20px;
+    text-shadow:
+    0 0 10px #00fff7,
+    0 0 20px #00fff7;
+}
+
+#about{
+    display:none;
+    background:#000;
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+h1{
+    color:#ff0000;
+    text-shadow:
+    0 0 10px red,
+    0 0 25px red;
+    margin-bottom:30px;
+}
+
+p{
+    font-size:24px;
+    max-width:900px;
+    line-height:1.7;
+}
+
+button{
+    margin-top:40px;
+    padding:15px 35px;
+    background:#ff0000;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+button:hover{
+    box-shadow:0 0 20px red;
+}
+</style>
+
+</head>
+<body>
+
+<div class="page" id="home">
+
+<div id="logo" onclick="avaa()">
+VEIKKIZ
+</div>
+
+<div class="info">
+Paina tekstiä niin pääset lisätietoihin
+</div>
+
+</div>
+
+<div class="page" id="about">
+
+<h1>VEIKKIZ</h1>
+
+<p>
+Moi! Oon Veikka, paremmin YouTubessa nimellä <b>Veikkiz</b>.
+Teen tänne pelivideoita, kuten Minecraftia, FS22:ta ja monia muita pelejä.
+Teen myös joskus musiikkia.
+</p>
+
+<button onclick="takaisin()">
+Takaisin
+</button>
+
+</div>
+
+<script>
+
+function avaa(){
+document.getElementById("home").style.display="none";
+document.getElementById("about").style.display="flex";
+}
+
+function takaisin(){
+document.getElementById("about").style.display="none";
+document.getElementById("home").style.display="flex";
+}
+
+</script>
+
+</body>
+</html>
