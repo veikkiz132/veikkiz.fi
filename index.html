@@ -1,43 +1,224 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veikkiz</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#000;
+    color:#fff;
+}
+
+/* Kolme viivaa */
+.menu{
+    position:fixed;
+    top:20px;
+    left:20px;
+    font-size:40px;
+    color:#ff0000;
+    cursor:pointer;
+    text-shadow:0 0 15px red;
+    z-index:1000;
+}
+
+/* Sivuvalikko */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-260px;
+    width:260px;
+    height:100%;
+    background:#111;
+    transition:.3s;
+    padding-top:80px;
+    box-shadow:0 0 20px red;
+    z-index:999;
+}
+
+.sidebar a{
+    display:block;
+    padding:18px 25px;
+    color:#00ffff;
+    text-decoration:none;
+    font-size:22px;
+}
+
+.sidebar a:hover{
+    background:#ff0000;
+    color:white;
+}
+
+.page{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+}
+
+#home{
+    display:flex;
+}
+
+#logo{
+    font-size:90px;
+    color:#ff0000;
+    cursor:pointer;
+    text-shadow:
+    0 0 10px red,
+    0 0 20px red,
+    0 0 40px red,
+    0 0 80px red;
+}
+
+#logo:hover{
+    transform:scale(1.05);
+}
+
+.info{
+    margin-top:20px;
+    color:#00ffff;
+    font-size:22px;
+    text-shadow:0 0 10px cyan;
+}
+
+h1{
+    color:#ff0000;
+    margin-bottom:25px;
+    text-shadow:0 0 15px red;
+}
+
+p{
+    max-width:900px;
+    font-size:24px;
+    line-height:1.7;
+}
+
+.social{
+    display:block;
+    width:280px;
+    margin:12px auto;
+    padding:15px;
+    border-radius:10px;
+    background:#ff0000;
+    color:white;
+    text-decoration:none;
+    font-size:22px;
+    box-shadow:0 0 15px red;
+    transition:.3s;
+}
+
+.social:hover{
+    transform:scale(1.05);
+    background:#ff3333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#" onclick="showPage('home')">🏠 Etusivu</a>
+    <a href="#" onclick="showPage('about')">👤 Tietoa</a>
+    <a href="#" onclick="showPage('social')">🌐 Some</a>
+</div>
+
+<div class="page" id="home">
+    <div id="logo" onclick="showPage('about')">VEIKKIZ</div>
+
+    <div class="info">
+        Paina tekstiä niin pääset lisätietoihin
+    </div>
+</div>
+
+<div class="page" id="about">
+    <h1>VEIKKIZ</h1>
+
+    <p>
+        Moi! Oon Veikka, paremmin YouTubessa nimellä <b>Veikkiz</b>.<br><br>
+
+        Teen tänne pelivideoita mm. Minecraftia, FS22:ta ja monia muita pelejä.<br><br>
+
+        Teen myös joskus musiikkia.
+    </p>
+</div>
+
 <div class="page" id="social">
 
-    <h1>Some</h1>
+    <h1>Seuraa minua</h1>
 
-    <a class="yt"
+    <a class="social"
        href="https://www.youtube.com/@veikkizyt_official"
        target="_blank">
        📺 YouTube
     </a>
 
-    <br><br>
-
-    <a class="yt"
+    <a class="social"
        href="https://www.instagram.com/official.veikkizyt"
        target="_blank">
        📷 Instagram
     </a>
 
-    <br><br>
-
-    <a class="yt"
+    <a class="social"
        href="https://www.tiktok.com/@official_veikkiz"
        target="_blank">
        🎵 TikTok
     </a>
 
-    <br><br>
-
-    <a class="yt"
+    <a class="social"
        href="https://www.twitch.tv/veikkalehtone"
        target="_blank">
        🎮 Twitch
     </a>
 
-    <br><br>
-
-    <a class="yt"
+    <a class="social"
        href="https://discord.gg/y6tcd3Nh"
        target="_blank">
        💬 Discord
     </a>
 
 </div>
+
+<script>
+
+let open=false;
+
+function toggleMenu(){
+    if(open){
+        document.getElementById("sidebar").style.left="-260px";
+        open=false;
+    }else{
+        document.getElementById("sidebar").style.left="0";
+        open=true;
+    }
+}
+
+function showPage(id){
+
+    document.getElementById("home").style.display="none";
+    document.getElementById("about").style.display="none";
+    document.getElementById("social").style.display="none";
+
+    document.getElementById(id).style.display="flex";
+
+    document.getElementById("sidebar").style.left="-260px";
+    open=false;
+}
+
+</script>
+
+</body>
+</html>
